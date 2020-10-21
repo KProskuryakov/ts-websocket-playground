@@ -1,7 +1,13 @@
 import { Message } from "../Message";
 
-// let socket = new WebSocket('wss://' + document.location.host + '/');
-let socket = new WebSocket('ws://' + document.location.host + '/');
+let socket = new WebSocket("wss://" + document.location.host + '/');
+socket.addEventListener("message", receiveMessage);
+
+socket.addEventListener("error", () => {
+  console.warn("Secure socket connection failed. Trying insecure.");
+  socket = new WebSocket("ws://" + document.location.host + '/');
+  socket.addEventListener("message", receiveMessage);
+});
 
 let inp = document.getElementById('input-text') as HTMLTextAreaElement;
 let out = document.getElementById('output-text') as HTMLTextAreaElement;
@@ -11,7 +17,7 @@ let onlineUsers: Set<string> = new Set();
 
 let loggedIn = false;
 
-socket.onmessage = (event) => {
+function receiveMessage(event: MessageEvent<any>) {
   let msg: Message = JSON.parse(event.data);
   if (msg.type === 'chat') {
     out.textContent += `${msg.message}\n`;

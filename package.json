@@ -12,9 +12,9 @@
     "watch-server": "onchange -i -k 'dist/**/*.js' -- npm run serve",
     "watch-reload": "livereload 'public/, serve'",
     "serve": "touch serve && npm start",
-    "prebuild": "rimraf dist/* public/client-bundle.js serve",
+    "prebuild": "rimraf dist/* public/client-bundle.js serve saunter-dev.tar.gz",
     "build": "webpack && tsc",
-    "postbuild": "",
+    "postbuild": "tar -czvf saunter-dev.tar.gz dist public package.json package-lock.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

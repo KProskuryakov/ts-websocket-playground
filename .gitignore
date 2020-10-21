@@ -2,3 +2,4 @@ node_modules
 dist
 public/client-bundle.js
 serve
+saunter-dev.tar.gz
