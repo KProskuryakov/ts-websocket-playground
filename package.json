@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./dist/server/Server.js",
     "debug": "node --inspect ./dist/server/Server.js",
-    "watch": "concurrently npm:watch-tsc npm:watch-webpack npm-watch-server npm:watch-reload",
+    "watch": "concurrently npm:watch-tsc npm:watch-webpack npm:watch-server npm:watch-reload",
     "watch-webpack": "webpack --watch",
     "watch-tsc": "tsc --watch --preserveWatchOutput",
     "watch-server": "onchange -i -k 'dist/**/*.js' -- npm run serve",
