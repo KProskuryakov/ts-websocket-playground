@@ -3,7 +3,7 @@ import path from 'path';
 import http from 'http';
 import helmet from 'helmet';
 import WebSocket from 'ws';
-import { ConnectionSet } from './Connection';
+import { connect } from './Connections';
 
 const port = 8080;
 
@@ -27,11 +27,7 @@ const server = http.createServer(app);
 
 const wss = new WebSocket.Server({ server });
 
-const conns = new ConnectionSet();
-
-wss.on('connection', function connection(ws) {
-  conns.addConnection(ws);
-});
+wss.on('connection', connect);
 
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);

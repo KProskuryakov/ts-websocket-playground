@@ -13,6 +13,8 @@ let inp = document.getElementById('input-text') as HTMLTextAreaElement;
 let out = document.getElementById('output-text') as HTMLTextAreaElement;
 let onl = document.getElementById('online-list') as HTMLTextAreaElement;
 
+// let comb = document.getElementById('combat-log') as HTMLTextAreaElement;
+
 let onlineUsers: Set<string> = new Set();
 
 let loggedIn = false;
@@ -21,6 +23,7 @@ function receiveMessage(event: MessageEvent<any>) {
   let msg: Message = JSON.parse(event.data);
   if (msg.type === 'chat') {
     out.textContent += `${msg.message}\n`;
+    out.scrollTop = out.scrollHeight;
   } else if (msg.type === 'online') {
     onlineUsers = new Set(msg.users);
     onl.textContent = Array.from(onlineUsers).sort().join('\n');
@@ -29,10 +32,14 @@ function receiveMessage(event: MessageEvent<any>) {
     onlineUsers.add(msg.name);
     Array.from(onlineUsers).sort().join('\n');
     onl.textContent = Array.from(onlineUsers).sort().join('\n');
+    out.textContent += `${msg.name} has logged in.\n`;
+    out.scrollTop = out.scrollHeight;
   } else if (msg.type === 'logout') {
     onlineUsers.delete(msg.name);
     Array.from(onlineUsers).sort().join('\n');
     onl.textContent = Array.from(onlineUsers).sort().join('\n');
+    out.textContent += `${msg.name} has logged out.\n`;
+    out.scrollTop = out.scrollHeight;
   }
 }
 
@@ -43,7 +50,7 @@ function sendMessage(msg: Message) {
 inp.addEventListener('keypress', (event) => {
   if (event.key == 'Enter' && !event.shiftKey) {
 
-    //Stops enter from creating a new line 
+    //Stops enter from creating a new line in the textbox
     event.preventDefault();
     const textbox = event.target as HTMLTextAreaElement;
     if (loggedIn) {

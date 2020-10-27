@@ -1,3 +1,7 @@
+import { Character } from "./Character";
+
+export type Message = ChatMessage | LoginOutMessage | OnlineMessage | CharacterMessage;
+
 export interface ChatMessage {
   type: "chat";
   message: string;
@@ -13,4 +17,7 @@ export interface OnlineMessage {
   users: string[];
 }
 
-export type Message = ChatMessage | LoginOutMessage | OnlineMessage;
+export interface CharacterMessage {
+  type: "character";
+  character: Character
+}
