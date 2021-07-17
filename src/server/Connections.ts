@@ -13,9 +13,9 @@ interface User {
 
 export function connect(ws: WebSocket) {
   alive.set(ws, true);
-  sendMessage(ws, {type: "chat", message: "Type your name to log in."})
+  sendMessage(ws, { type: "chat", message: "Type your name to log in." })
 
-  ws.on("message", function(data) {
+  ws.on("message", function (data) {
     const message: Message = JSON.parse(data.toString());
 
     if (message.type == "login" && !users.has(ws)) {
@@ -25,11 +25,11 @@ export function connect(ws: WebSocket) {
     }
   });
 
-  ws.on("pong", function() {
+  ws.on("pong", function () {
     alive.set(ws, true);
   });
 
-  ws.on("close", function() {
+  ws.on("close", function () {
     close(ws);
   });
 }
@@ -37,7 +37,7 @@ export function connect(ws: WebSocket) {
 function promote(ws: WebSocket, message: LoginOutMessage) {
   let name = message.name.trim().slice(0, 16);
   if (name.length == 0 || names.has(name)) {
-    sendMessage(ws, {type: "chat", message: "Please pick a different name."});
+    sendMessage(ws, { type: "chat", message: "Please pick a different name." });
     return;
   }
   const user: User = {
@@ -46,15 +46,15 @@ function promote(ws: WebSocket, message: LoginOutMessage) {
   }
   users.set(ws, user);
   names.add(name);
-  broadcast({type: "login", name: name});
-  sendMessage(ws, {type: "online", users: Array.from(names)});
-  sendMessage(ws, {type: "character", character: user.character});
+  broadcast({ type: "login", name: name });
+  sendMessage(ws, { type: "online", users: Array.from(names) });
+  sendMessage(ws, { type: "character", character: user.character });
 }
 
 function chat(ws: WebSocket, message: ChatMessage) {
   const chat = message.message.trim();
   if (chat.length > 0 && chat.length < 500) {
-    broadcast({type: "chat", message: `${users.get(ws)!.name}: ${chat}`})
+    broadcast({ type: "chat", message: `${users.get(ws)!.name}: ${chat}` })
   }
 }
 
@@ -74,14 +74,15 @@ function close(ws: WebSocket) {
     let user = users.get(ws)!;
     names.delete(user.name);
     users.delete(ws);
-    broadcast({type: "logout", name: user.name});
+    broadcast({ type: "logout", name: user.name });
   }
 }
 
 setInterval(() => {
   alive.forEach((a, ws) => {
     if (a === false) {
-      return ws.terminate();
+      ws.terminate();
+      return;
     }
 
     alive.set(ws, false);

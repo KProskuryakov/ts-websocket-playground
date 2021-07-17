@@ -1,5 +1,9 @@
 import { Message } from "../Message";
 
+let inp = document.getElementById('input-text') as HTMLTextAreaElement;
+let out = document.getElementById('output-text') as HTMLTextAreaElement;
+let onl = document.getElementById('online-list') as HTMLTextAreaElement;
+
 let socket = new WebSocket("wss://" + document.location.host + '/');
 socket.addEventListener("message", receiveMessage);
 
@@ -7,11 +11,8 @@ socket.addEventListener("error", () => {
   console.warn("Secure socket connection failed. Trying insecure.");
   socket = new WebSocket("ws://" + document.location.host + '/');
   socket.addEventListener("message", receiveMessage);
+  out.textContent += "Warning: Connected to websocket server insecurely.\n";
 });
-
-let inp = document.getElementById('input-text') as HTMLTextAreaElement;
-let out = document.getElementById('output-text') as HTMLTextAreaElement;
-let onl = document.getElementById('online-list') as HTMLTextAreaElement;
 
 // let comb = document.getElementById('combat-log') as HTMLTextAreaElement;
 
@@ -54,9 +55,9 @@ inp.addEventListener('keypress', (event) => {
     event.preventDefault();
     const textbox = event.target as HTMLTextAreaElement;
     if (loggedIn) {
-      sendMessage({type: "chat", message: textbox.value.trim()});
+      sendMessage({ type: "chat", message: textbox.value.trim() });
     } else {
-      sendMessage(({type: "login", name: textbox.value.trim()}));
+      sendMessage(({ type: "login", name: textbox.value.trim() }));
     }
     textbox.value = '';
     return true;

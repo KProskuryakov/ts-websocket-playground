@@ -10,13 +10,21 @@ const port = 8080;
 const app = express();
 
 // disable CSP if not in production for livereload to work
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
+  console.log("Starting server in development mode.");
   app.use(
     helmet({
-      contentSecurityPolicy: false
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          defaultSrc: ['self', 'localhost:*', "ws://localhost:*"],
+          scriptSrc: ['self', 'localhost:*', "ws://localhost:*"]
+        }
+      }
     })
   );
 } else {
+  console.log("Starting server in production mode. Enabling CSP.");
   app.use(helmet());
 }
 

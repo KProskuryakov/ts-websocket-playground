@@ -3,19 +3,24 @@
 
 <head>
   <title>saunter dev</title>
+  <link href="index.css" rel="stylesheet">
 </head>
 
 <body>
-  <h1>saunter dev</h1>
-  <p>Chat:</p>
-  <textarea id="output-text" rows="10" cols="50" disabled readonly></textarea>
-  <br/>
-  <textarea id="input-text" rows="2" cols="50" autofocus></textarea>
-  <br />
-  <p>Online:</p>
-  <textarea id="online-list" rows="5" cols="18" disabled readonly ></textarea>
-
-  <h2>Character</h2>
+  <div class="wrapper">
+    <textarea class="wide3" id="output-text" disabled readonly></textarea>
+    <textarea class="wide3" id="input-text" rows="1" cols="50" autofocus></textarea>
+    <textarea id="online-list" rows="4" cols="18" disabled readonly></textarea>
+    <div>
+      <p>Test</p>
+    </div>
+    <div>
+      <p>Whacky</p>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 
   <script src="client-bundle.js"></script>
   <script src="http://localhost:35729/livereload.js?snipver=1"></script>
