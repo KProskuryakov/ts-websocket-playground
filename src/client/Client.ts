@@ -27,7 +27,7 @@ function receiveMessage(event: MessageEvent<any>) {
     out.scrollTop = out.scrollHeight;
   } else if (msg.type === 'online') {
     onlineUsers = new Set(msg.users);
-    onl.textContent = Array.from(onlineUsers).sort().join('\n');
+    onl.textContent = "Online Users: \n" + Array.from(onlineUsers).sort().join('\n');
     loggedIn = true;
   } else if (msg.type === 'login') {
     onlineUsers.add(msg.name);
@@ -49,7 +49,7 @@ function sendMessage(msg: Message) {
 }
 
 inp.addEventListener('keypress', (event) => {
-  if (event.key == 'Enter' && !event.shiftKey) {
+  if ((event.key == 'Enter' || event.keyCode === 13) && !event.shiftKey) {
 
     //Stops enter from creating a new line in the textbox
     event.preventDefault();

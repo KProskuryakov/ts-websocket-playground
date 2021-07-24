@@ -1,12 +1,17 @@
+body {
+  margin: 0;
+  background-color: black;
+  color: white;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 3fr 1fr 1fr 1fr;
   grid-gap: 1rem;
-  padding: 0;
-  padding: 0;
-  margin: 0;
-  height: 97vh;
+  height: 100%;
+  width: 100%;
+  position: fixed;
 }
 
 .wide3 {
@@ -14,7 +19,12 @@
   grid-column-end: 4;
 }
 
-div {
-  background-color: gray;
-  border: solid;
+textarea {
+  color: white;
+  background-color: rgb(75, 75, 75);
+  resize: none;
+}
+
+div > div {
+  background-color: rgb(75, 75, 75);
 }
