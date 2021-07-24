@@ -49,6 +49,7 @@ function sendMessage(msg: Message) {
 }
 
 inp.addEventListener('keypress', (event) => {
+  out.textContent += `Key: ${event.key}  KeyCode: ${event.keyCode}  Which: ${event.which}\n`;
   if ((event.key == 'Enter' || event.keyCode === 13) && !event.shiftKey) {
 
     //Stops enter from creating a new line in the textbox
@@ -57,7 +58,7 @@ inp.addEventListener('keypress', (event) => {
     if (loggedIn) {
       sendMessage({ type: "chat", message: textbox.value.trim() });
     } else {
-      sendMessage(({ type: "login", name: textbox.value.trim() }));
+      sendMessage({ type: "login", name: textbox.value.trim() });
     }
     textbox.value = '';
     return true;
