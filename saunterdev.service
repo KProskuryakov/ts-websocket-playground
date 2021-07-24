@@ -12,7 +12,7 @@ IgnoreSIGPIPE=false
 KillMode=process
 User=kp
 WorkingDirectory=/home/kp/saunter-dev
-ExecStart=npm start
+ExecStart=/home/kp/saunter-dev/start.sh
 
 [Install]
 WantedBy=multi-user.target
