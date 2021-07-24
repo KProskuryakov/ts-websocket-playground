@@ -50,10 +50,6 @@ function sendMessage(msg: Message) {
 }
 
 inpform.addEventListener('submit', (event) => {
-  // out.textContent += `Key: ${event.key}  KeyCode: ${event.keyCode}  Which: ${event.which}\n`;
-  // if ((event.key == 'Enter' || event.keyCode === 13 || event.which === 13) && !event.shiftKey) {
-
-  //Stops enter from creating a new line in the textbox
   event.preventDefault();
   if (loggedIn) {
     sendMessage({ type: "chat", message: inp.value.trim() });
@@ -62,6 +58,4 @@ inpform.addEventListener('submit', (event) => {
   }
   inp.value = '';
   return false;
-  // }
-  // return false;
 });
