@@ -25,6 +25,21 @@ textarea {
   resize: none;
 }
 
+input {
+  height: 100%;
+  width: 98%;
+  background-color: rgb(95, 95, 95);
+  color: white;
+  margin: auto;
+  display: block;
+  line-break: auto;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(194, 194, 194);
+  opacity: 1; /* Firefox */
+}
+
 div > div {
   background-color: rgb(75, 75, 75);
 }

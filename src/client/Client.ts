@@ -1,6 +1,7 @@
 import { Message } from "../Message";
 
-let inp = document.getElementById('input-text') as HTMLTextAreaElement;
+let inpform = document.getElementById('input-form') as HTMLFormElement;
+let inp = document.getElementById('input-text') as HTMLInputElement;
 let out = document.getElementById('output-text') as HTMLTextAreaElement;
 let onl = document.getElementById('online-list') as HTMLTextAreaElement;
 
@@ -48,20 +49,19 @@ function sendMessage(msg: Message) {
   socket.send(JSON.stringify(msg));
 }
 
-inp.addEventListener('keypress', (event) => {
-  out.textContent += `Key: ${event.key}  KeyCode: ${event.keyCode}  Which: ${event.which}\n`;
-  if ((event.key == 'Enter' || event.keyCode === 13 || event.which === 13) && !event.shiftKey) {
+inpform.addEventListener('submit', (event) => {
+  // out.textContent += `Key: ${event.key}  KeyCode: ${event.keyCode}  Which: ${event.which}\n`;
+  // if ((event.key == 'Enter' || event.keyCode === 13 || event.which === 13) && !event.shiftKey) {
 
-    //Stops enter from creating a new line in the textbox
-    event.preventDefault();
-    const textbox = event.target as HTMLTextAreaElement;
-    if (loggedIn) {
-      sendMessage({ type: "chat", message: textbox.value.trim() });
-    } else {
-      sendMessage({ type: "login", name: textbox.value.trim() });
-    }
-    textbox.value = '';
-    return true;
+  //Stops enter from creating a new line in the textbox
+  event.preventDefault();
+  if (loggedIn) {
+    sendMessage({ type: "chat", message: inp.value.trim() });
+  } else {
+    sendMessage({ type: "login", name: inp.value.trim() });
   }
+  inp.value = '';
   return false;
+  // }
+  // return false;
 });
