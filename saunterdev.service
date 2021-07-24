@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=5
 User=kp
-WorkingDirector=/home/kp/saunter-dev
+WorkingDirectory=/home/kp/saunter-dev
 ExecStart=npm start
 
 [Install]
