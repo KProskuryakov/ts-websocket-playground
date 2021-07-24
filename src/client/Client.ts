@@ -50,7 +50,7 @@ function sendMessage(msg: Message) {
 
 inp.addEventListener('keypress', (event) => {
   out.textContent += `Key: ${event.key}  KeyCode: ${event.keyCode}  Which: ${event.which}\n`;
-  if ((event.key == 'Enter' || event.keyCode === 13) && !event.shiftKey) {
+  if ((event.key == 'Enter' || event.keyCode === 13 || event.which === 13) && !event.shiftKey) {
 
     //Stops enter from creating a new line in the textbox
     event.preventDefault();
