@@ -2,10 +2,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 3fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  padding: 0;
   padding: 0;
   margin: 0;
-  width: 98vw;
-  height: 98vh;
+  height: 97vh;
 }
 
 .wide3 {
