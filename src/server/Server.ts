@@ -5,7 +5,7 @@ import helmet from 'helmet';
 import WebSocket from 'ws';
 import { connect } from './Connections';
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const app = express();
 
