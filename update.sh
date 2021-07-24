@@ -1,6 +1,6 @@
 #!/bin/bash
-./stop.sh
-
 git pull
-
-./start.sh
+sudo cp saunterdev.service /etc/systemd/system/saunterdev.service
+sudo systemctl daemon-reload
+sudo systemctl restart saunterdev
+sudo systemctl enable saunterdev

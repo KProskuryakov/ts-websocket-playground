@@ -1,0 +1,15 @@
+[Unit]
+Description=saunter.dev server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+User=kp
+WorkingDirector=/home/kp/saunter-dev
+ExecStart=npm start
+
+[Install]
+WantedBy=multi-user.target
