@@ -1,6 +1,5 @@
 import { Message } from "../Message";
 
-let send = document.getElementById('send-button') as HTMLDivElement;
 let inp = document.getElementById('input-text') as HTMLInputElement;
 let out = document.getElementById('output-text') as HTMLTextAreaElement;
 let onl = document.getElementById('online-list') as HTMLTextAreaElement;
@@ -59,28 +58,4 @@ inp.addEventListener('keypress', (event) => {
     return false;
   }
   return true;
-});
-
-send.addEventListener('touchstart', (event) => {
-  out.textContent += "Touched\n";
-  event.preventDefault();
-  if (loggedIn) {
-    sendMessage({ type: "chat", message: inp.value.trim() });
-  } else {
-    sendMessage({ type: "login", name: inp.value.trim() });
-  }
-  inp.value = '';
-  return false;
-});
-
-send.addEventListener('click', (event) => {
-  out.textContent += "Clicked\n";
-  event.preventDefault();
-  if (loggedIn) {
-    sendMessage({ type: "chat", message: inp.value.trim() });
-  } else {
-    sendMessage({ type: "login", name: inp.value.trim() });
-  }
-  inp.value = '';
-  return false;
 });
