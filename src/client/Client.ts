@@ -1,6 +1,6 @@
 import { Message } from "../Message";
 
-let inpform = document.getElementById('input-form') as HTMLFormElement;
+let send = document.getElementById('send-button') as HTMLDivElement;
 let inp = document.getElementById('input-text') as HTMLInputElement;
 let out = document.getElementById('output-text') as HTMLTextAreaElement;
 let onl = document.getElementById('online-list') as HTMLTextAreaElement;
@@ -14,8 +14,6 @@ socket.addEventListener("error", () => {
   socket.addEventListener("message", receiveMessage);
   out.textContent += "Warning: Connected to websocket server insecurely.\n";
 });
-
-// let comb = document.getElementById('combat-log') as HTMLTextAreaElement;
 
 let onlineUsers: Set<string> = new Set();
 
@@ -49,7 +47,21 @@ function sendMessage(msg: Message) {
   socket.send(JSON.stringify(msg));
 }
 
-inpform.addEventListener('submit', (event) => {
+inp.addEventListener('keypress', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    if (loggedIn) {
+      sendMessage({ type: "chat", message: inp.value.trim() });
+    } else {
+      sendMessage({ type: "login", name: inp.value.trim() });
+    }
+    inp.value = '';
+    return false;
+  }
+  return true;
+});
+
+send.addEventListener('click', (event) => {
   event.preventDefault();
   if (loggedIn) {
     sendMessage({ type: "chat", message: inp.value.trim() });
