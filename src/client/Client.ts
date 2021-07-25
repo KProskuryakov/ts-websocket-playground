@@ -3,6 +3,7 @@ import { Message } from "../Message";
 let inp = document.getElementById('input-text') as HTMLInputElement;
 let out = document.getElementById('output-text') as HTMLTextAreaElement;
 let onl = document.getElementById('online-list') as HTMLTextAreaElement;
+let buttons = document.querySelectorAll("div > div") as NodeListOf<HTMLDivElement>;
 
 let socket = new WebSocket("wss://" + document.location.host + '/');
 socket.addEventListener("message", receiveMessage);
@@ -58,4 +59,11 @@ inp.addEventListener('keypress', (event) => {
     return false;
   }
   return true;
+});
+
+buttons.forEach((v) => {
+  v.addEventListener('click', (event) => {
+    event.preventDefault();
+    return false;
+  });
 });
