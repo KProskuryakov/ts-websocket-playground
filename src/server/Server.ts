@@ -25,7 +25,16 @@ if (process.env.NODE_ENV === "development") {
   );
 } else {
   console.log("Starting server in production mode. Enabling CSP.");
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          defaultSrc: ['self', 'ws:', "wss:"],
+        }
+      }
+    })
+  );
 }
 
 app.use(express.static(path.join(__dirname, '../../public')));
