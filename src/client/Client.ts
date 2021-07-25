@@ -61,6 +61,17 @@ inp.addEventListener('keypress', (event) => {
   return true;
 });
 
+send.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  if (loggedIn) {
+    sendMessage({ type: "chat", message: inp.value.trim() });
+  } else {
+    sendMessage({ type: "login", name: inp.value.trim() });
+  }
+  inp.value = '';
+  return false;
+});
+
 send.addEventListener('click', (event) => {
   event.preventDefault();
   if (loggedIn) {
