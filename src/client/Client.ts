@@ -62,6 +62,7 @@ inp.addEventListener('keypress', (event) => {
 });
 
 send.addEventListener('touchstart', (event) => {
+  out.textContent += "Touched\n";
   event.preventDefault();
   if (loggedIn) {
     sendMessage({ type: "chat", message: inp.value.trim() });
@@ -73,6 +74,7 @@ send.addEventListener('touchstart', (event) => {
 });
 
 send.addEventListener('click', (event) => {
+  out.textContent += "Clicked\n";
   event.preventDefault();
   if (loggedIn) {
     sendMessage({ type: "chat", message: inp.value.trim() });
