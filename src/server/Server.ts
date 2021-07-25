@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "development") {
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          defaultSrc: ['self', 'ws:', "wss:"],
+          defaultSrc: ['self', "wss://saunterdev.herokuapp.com:*"],
         }
       }
     })
