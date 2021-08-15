@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: Run Tests
 
 on:
   push:
@@ -26,4 +26,6 @@ jobs:
       run: |
         npm -D install
         npm run prestart
-        npm test
+
+    - name: Test
+      run: npm test
