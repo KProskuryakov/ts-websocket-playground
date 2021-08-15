@@ -11,7 +11,7 @@ interface User {
   character: Character;
 }
 
-export function connect(ws: WebSocket) {
+export function connect(ws: WebSocket): void {
   alive.set(ws, true);
   sendMessage(ws, { type: "chat", message: "Type your name to log in." })
 
@@ -35,7 +35,7 @@ export function connect(ws: WebSocket) {
 }
 
 function promote(ws: WebSocket, message: LoginOutMessage) {
-  let name = message.name.trim().slice(0, 16);
+  const name = message.name.trim().slice(0, 16);
   if (name.length == 0 || names.has(name)) {
     sendMessage(ws, { type: "chat", message: "Please pick a different name." });
     return;
@@ -53,8 +53,9 @@ function promote(ws: WebSocket, message: LoginOutMessage) {
 
 function chat(ws: WebSocket, message: ChatMessage) {
   const chat = message.message.trim();
-  if (chat.length > 0 && chat.length < 500) {
-    broadcast({ type: "chat", message: `${users.get(ws)!.name}: ${chat}` })
+  const user = users.get(ws);
+  if (chat.length > 0 && chat.length < 500 && user) {
+    broadcast({ type: "chat", message: `${user.name}: ${chat}` })
   }
 }
 
@@ -63,15 +64,15 @@ function sendMessage(ws: WebSocket, message: Message) {
 }
 
 function broadcast(message: Message) {
-  for (let ws of users.keys()) {
+  for (const ws of users.keys()) {
     sendMessage(ws, message);
   }
 }
 
 function close(ws: WebSocket) {
   alive.delete(ws);
-  if (users.has(ws)) {
-    let user = users.get(ws)!;
+  const user = users.get(ws);
+  if (user) {
     names.delete(user.name);
     users.delete(ws);
     broadcast({ type: "logout", name: user.name });

@@ -1,9 +1,9 @@
 import { Message } from "../Message";
 
-let inp = document.getElementById('input-text') as HTMLInputElement;
-let out = document.getElementById('output-text') as HTMLTextAreaElement;
-let onl = document.getElementById('online-list') as HTMLTextAreaElement;
-let buttons = document.querySelectorAll("div > div") as NodeListOf<HTMLDivElement>;
+const inp = document.getElementById('input-text') as HTMLInputElement;
+const out = document.getElementById('output-text') as HTMLTextAreaElement;
+const onl = document.getElementById('online-list') as HTMLTextAreaElement;
+const buttons = document.querySelectorAll("div > div") as NodeListOf<HTMLDivElement>;
 
 let socket = new WebSocket("wss://" + document.location.host + '/');
 socket.addEventListener("message", receiveMessage);
@@ -19,8 +19,8 @@ let onlineUsers: Set<string> = new Set();
 
 let loggedIn = false;
 
-function receiveMessage(event: MessageEvent<any>) {
-  let msg: Message = JSON.parse(event.data);
+function receiveMessage(event: MessageEvent<string>) {
+  const msg: Message = JSON.parse(event.data);
   if (msg.type === 'chat') {
     out.textContent += `${msg.message}\n`;
     out.scrollTop = out.scrollHeight;
