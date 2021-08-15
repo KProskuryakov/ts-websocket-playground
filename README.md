@@ -1,3 +1,5 @@
+[![Run Tests](https://github.com/KProskuryakov/saunter-dev/actions/workflows/webpack.yml/badge.svg?branch=main)](https://github.com/KProskuryakov/saunter-dev/actions/workflows/webpack.yml)
+
 install gcloud with this: https://cloud.google.com/sdk/docs/install#deb
 
 ```
