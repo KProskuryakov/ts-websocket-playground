@@ -7,7 +7,7 @@ import { connect } from './Connections';
 
 const port = process.env.PORT || 8080;
 
-const app = express();
+export const app = express();
 
 // disable CSP if not in production for livereload to work
 if (process.env.NODE_ENV === "development") {
@@ -38,6 +38,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.static(path.join(__dirname, '../../public')));
+// app.use(express.static('/home/kp/saunter-dev/public/'));
 console.log(__dirname);
 
 const server = http.createServer(app);
@@ -48,4 +49,5 @@ wss.on('connection', connect);
 
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
+  // app.emit("appStarted");
 });
