@@ -49,5 +49,4 @@ wss.on('connection', connect);
 
 server.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
-  // app.emit("appStarted");
 });

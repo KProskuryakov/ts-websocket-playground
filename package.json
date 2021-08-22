@@ -15,7 +15,7 @@
     "watch-server": "onchange -i -k 'dist/**/*.js' -- npm run serve",
     "watch-reload": "livereload 'public/, serve'",
     "serve": "touch serve && npm run start-dev",
-    "test": "mocha -r ts-node/register 'test/**/*.ts'"
+    "test": "mocha --exit -r ts-node/register 'test/**/*.ts'"
   },
   "repository": {
     "type": "git",
